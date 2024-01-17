@@ -36,7 +36,7 @@ function POSPage() {
 
   const fetchProducts = async () => {
     setIsLoading(true);
-    const result = await axios.get('products');
+    const result = await axios.get('https://json-server-vercel-sable.vercel.app/products');
     setProducts(await result.data);
     setIsLoading(false);
   }
@@ -99,7 +99,7 @@ function POSPage() {
     // Pastikan stok tidak menjadi nilai negatif
     const updatedStock = Math.max(newStock, 0);
 
-    await axios.patch(`products/${productId}`, { stock: updatedStock });
+    await axios.patch(`https://json-server-vercel-sable.vercel.app/products/${productId}`, { stock: updatedStock });
     fetchProducts(); // Fetch updated products
 
     // Menampilkan toast jika stok habis
@@ -229,7 +229,7 @@ function POSPage() {
                 {uangBayar > totalAmount ? <div className="badge bg-info" style={{ marginBottom: "20px", width: "100%", height: "50px", fontSize: "xx-large"}}>Kembalian: <b><span style={{color: "green"}}><CurrencyFormatter value={uangBayar - totalAmount} /></span></b></div> : uangBayar !== "" ? <div className="badge bg-info" style={{ marginBottom: "20px", width: "100%", height: "50px", fontSize: "18px"}}>Kembalian: <b><span style={{color: "red"}}>Uang yang dibayarkan kurang!</span></b></div>: ""}
 
                 <button style={{ width: '100%' }} className='btn btn-success' onClick={handlePrint}><b>BAYAR SEKARANG</b></button>
-                <a href='/pos' style={{ width: '100%', marginTop: '20px', marginBottom: '20px' }} className='btn btn-primary'><b>BELANJA LAGI</b></a>
+                <a href='/penjualan' style={{ width: '100%', marginTop: '20px', marginBottom: '20px' }} className='btn btn-primary'><b>BELANJA LAGI</b></a>
               </div> : <div style={{ textAlign: "center" }}><img src="cart4.gif" alt="cart" style={{ width: "400px", height: "200px", backgroundColor: 'lightblue', borderRadius: "10px" }} /><div className="badge bg-danger" style={{ width: "300px", marginTop: "10px"}}>Silakan tambahkan barang kedalam keranjang!</div></div>
             }
           </div>

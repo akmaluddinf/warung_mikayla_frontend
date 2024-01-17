@@ -25,13 +25,13 @@ const MasterDataPage = () => {
   }, []);
 
   const fetchData = () => {
-    axios.get('http://localhost:5000/products')
+    axios.get('https://json-server-vercel-sable.vercel.app/products')
       .then((response) => setProducts(response.data))
       .catch((error) => console.error('Error fetching data:', error));
   };
 
   const handleAddProduct = (newProduct) => {
-    axios.post('http://localhost:5000/products', newProduct)
+    axios.post('https://json-server-vercel-sable.vercel.app/products', newProduct)
       .then((response) => {
         setProducts([...products, response.data]);
         setIsAdding(false); // Setelah menambah, kembali ke mode normal
@@ -41,7 +41,7 @@ const MasterDataPage = () => {
   };
 
   const handleEditProduct = (editedProduct) => {
-    axios.put(`http://localhost:5000/products/${editedProduct.id}`, editedProduct)
+    axios.put(`https://json-server-vercel-sable.vercel.app/products/${editedProduct.id}`, editedProduct)
       .then(() => {
         setProducts(products.map((product) => (product.id === editedProduct.id ? editedProduct : product)));
         setEditingProduct(null);
@@ -51,14 +51,14 @@ const MasterDataPage = () => {
   };
 
   const handleDeleteProduct = (productId) => {
-    axios.delete(`http://localhost:5000/products/${productId}`)
+    axios.delete(`https://json-server-vercel-sable.vercel.app/products/${productId}`)
       .then(() => setProducts(products.filter((product) => product.id !== productId)))
       .catch((error) => console.error('Error deleting product:', error));
   };
 
   const handleEditButtonClick = (productId) => {
     // Panggil fungsi getProductById untuk mendapatkan data produk berdasarkan ID
-    axios.get(`http://localhost:5000/products/${productId}`)
+    axios.get(`https://json-server-vercel-sable.vercel.app/products/${productId}`)
       .then((response) => {
         // setEditingProduct(response.data);
         setEditingProduct((prevEditingProduct) => (prevEditingProduct === productId ? null : productId));
